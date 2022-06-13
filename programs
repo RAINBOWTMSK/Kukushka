@@ -1,0 +1,269 @@
+//1.1 zadanie po algoritmam tovarisha
+int S = int.Parse(Console.ReadLine());
+int V = int.Parse(Console.ReadLine());
+
+int H = V / S;
+Console.WriteLine(H);
+
+//1.2 zadanie po algoritmam tovarisha
+
+int a = int.Parse(Console.ReadLine());
+int b = int.Parse(Console.ReadLine());
+int c = int.Parse(Console.ReadLine());
+if (a < 3)
+{
+    Console.Error.WriteLine(a);
+}
+if (b < 3)
+{
+    Console.Error.WriteLine(b);
+}
+
+if (c < 3)
+{
+    Console.Error.WriteLine(c);
+}
+
+
+// 1.3 zadanie po algoritmam tovarisha
+
+int N = int.Parse(Console.ReadLine());
+int count = 0;
+int[] mass = new int[N];
+
+for (int i = 0; i < N; i++)
+{
+    mass[i] = int.Parse(Console.ReadLine());
+}
+for (int i = 0; i < N; i++)
+{
+    if (mass[i] / 2 == 0)
+    {
+        count++;
+    }
+}
+Console.WriteLine(count);
+
+//1.4 zadanie po algoritmam tovarisha
+
+int leviy = int.Parse(Console.ReadLine() ?? "");
+int praviy = int.Parse(Console.ReadLine() ?? "");
+int y;
+for (int i = leviy; i <= praviy; i++)
+{
+    Console.WriteLine($"x = {i}");
+    y = i * 2 + 3 * i - 17;
+    Console.WriteLine($"y = {y}\n");
+}
+
+//1.5 zadanie po algoritmam tovarisha
+
+int n = 0, s = 0, a = 1;
+while (a != 0)
+{
+    Console.Write("Введите целое число: ");
+    a = Convert.ToInt32(Console.ReadLine());
+    n++;
+}
+Console.WriteLine("Всего чисел = {1}", s, n);
+
+
+//1.6 zadanie po algoritmam tovarisha
+
+int a1 = int.Parse(Console.ReadLine() ?? "");
+int b1 = int.Parse(Console.ReadLine() ?? "");
+int c1 = int.Parse(Console.ReadLine() ?? "");
+
+for (int i = a1; i <= b1; i++)
+{
+    if (i % c1 == 0)
+    {
+        Console.WriteLine($"{i}");
+    }
+}
+
+//2.1 zadanie 5 iz 8
+
+namespace Zadanie1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random rnd = new Random();
+
+            Console.Write($"Введите диапозон загадываемого числа. От 1 до....: ");
+            int n = int.Parse(Console.ReadLine()); // Диапазон
+
+            Console.Write($"Введите количество попыток: ");
+            int count_attempts = int.Parse(Console.ReadLine()); // Количество попыток
+            int hidden_number = rnd.Next(1, n); // Генерация отгадываемого числа
+            for (int i = 0; i < count_attempts; i++)
+            {
+                Console.Write($"Введите загаданное число: ");
+                int try_to_guessing = int.Parse(Console.ReadLine()); // Попытка угадать число
+
+                if (try_to_guessing < hidden_number)
+                {
+                    Console.WriteLine($"Загаданное число больше!");
+                }
+
+                else if (try_to_guessing > hidden_number)
+                {
+                    Console.WriteLine($" Загаданное число меньше! ");
+                }
+
+                else
+                {
+                    Console.WriteLine($" Ура! Вы угадали число! ");
+                    break;
+                }
+
+                if (i == count_attempts - 1)
+                {
+                    Console.WriteLine($" Попытки закончились! ");
+                }
+            }
+        }
+    }
+}
+
+//2.2 zadanie 5 iz 8
+
+namespace Zadanie2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random rand = new Random();
+            Console.Write($"Введите количество элементов массива: ");
+
+            int Dimension_Of_The_Array = int.Parse(Console.ReadLine());
+            int[] Array = new int[Dimension_Of_The_Array]; // Изначальный массив
+            for (int i = 0; i < Dimension_Of_The_Array; i++) // Заполнение массива случайными числами
+            {
+                Array[i] = rand.Next(-100, 100);
+                Console.Write($"{Array[i]}\t");
+            }
+
+            Console.WriteLine($"");
+            Random random = new Random();
+            int randd;
+            for (int i = 0; i < Dimension_Of_The_Array; i++)
+            {
+                int Buffer = Array[i];
+                randd = random.Next(i, Dimension_Of_The_Array);
+                Array[i] = Array[randd];
+                Array[randd] = Buffer;
+            }
+            Console.WriteLine($"Перемешанный массив:");
+            for (int i = 0; i < Dimension_Of_The_Array; i++)
+            {
+                Console.Write($"{Array[i]}\t");
+            }
+            Console.WriteLine($"");
+        }
+    }
+}
+
+//2.3 zadanie 5 iz 8
+
+using System;
+using System.Linq;
+
+namespace WorkOn2And3
+{
+internal class Program
+{
+public static void Main(string[] args)
+{
+Program3();
+}
+
+public static void Program3()
+{
+Console.Write("Введите год: ");
+int c = int.Parse(Console.ReadLine());
+bool leapYear = c % 4 == 0;
+
+int[] monthWith31Days = { 1, 3, 5, 7, 8, 10, 12 };
+
+int[] array = new int[12];
+
+for (var i = 1; i <= 12; i++)
+{
+int index;
+if (monthWith31Days.Contains(i)) index = 31;
+else if (i == 2 && leapYear) index = 29;
+else if (i == 2 && !leapYear) index = 28;
+else index = 30;
+
+for (var j = index; j > 23; j--)
+{
+var dt = new DateTime(c, i, j);
+if (dt.DayOfWeek != DayOfWeek.Thursday) continue;
+array[i - 1] = j;
+break;
+}
+}
+
+Console.WriteLine(string.Join(" ", array));
+
+}
+
+}
+}
+
+//2.4 zadanie 5 iz 8
+
+using System.Security.Cryptography;
+class Program
+{
+public static byte RND()
+{
+RNGCryptoServiceProvider Rand = new RNGCryptoServiceProvider();
+byte[] randomNumber = new byte[1];
+Rand.GetBytes(randomNumber);
+return (randomNumber[0]);
+}
+
+static void Main(string[] args)
+{
+
+for (int i = 0; i < 100; i++)
+{
+double R = RND();
+Console.Write(R);
+Console.Write(" ");
+}
+Console.ReadLine();
+
+}
+}
+
+//2.5 zadanie 5 iz 8
+
+namespace Zadanie5
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        Console.Write("Введите год: ");
+        int Year = int.Parse(Console.ReadLine());
+
+        Console.Write("Введите месяц: ");
+        int Month = int.Parse(Console.ReadLine());
+
+        Console.Write("Введите день: ");
+        int Day = int.Parse(Console.ReadLine());
+
+        var Julian_Calendar = new DateTime(Year, Month, Day);
+        var Gregorian_Calendar = Julian_Calendar.AddDays((Year / 100) - ((Year / 100) / 4) - 2);
+
+        Console.WriteLine($"По григорианскому календарю – {Gregorian_Calendar}");
+        Console.WriteLine($"По юлианскому календарю – {Julian_Calendar}");
+        }
+    }
+}
